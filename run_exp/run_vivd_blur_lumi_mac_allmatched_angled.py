@@ -156,6 +156,8 @@ def get_exp_info():
     exp_info = {
         "participant": f"{random.randint(0, 999999):06d}",
         "session": "001",
+        "age": "",
+        "gender": ["female", "male", "other"],
         "date": datetime.now().strftime("%Y-%m-%d_%H-%M-%S"),
     }
 
@@ -513,6 +515,8 @@ def save_results(exp_info, results):
     fieldnames = [
         "participant",
         "session",
+        "age",
+        "gender",
         "date",
         "block",
         "trial_index",
@@ -535,6 +539,8 @@ def save_results(exp_info, results):
             out = {
                 "participant": exp_info["participant"],
                 "session": exp_info["session"],
+                "age": exp_info["age"],
+                "gender": exp_info["gender"],
                 "date": exp_info["date"],
                 **row,
             }
@@ -1173,10 +1179,10 @@ def main():
             (
                 "Block 1\n\n"
                 "A white disc will appear.\n\n"
-                "Press SPACE to remove the disc and start recording.\n\n"
-                "Then press UP or DOWN as needed.\n\n"
+                "Press SPACE to remove the disc and start recording your responses.\n\n"
+                "Then press UP or DOWN to report any change you perceive in your afterimage vividness.\n\n"
                 "Press SPACE again to end the trial.\n\n"
-                "Press SPACE to begin."
+                "Press SPACE to begin the experiment."
             ),
             quit_windows=[stim_win],
         )
@@ -1214,19 +1220,15 @@ def main():
             kb,
             (
                 "Block 2\n\n"
-                "A white disc will appear on the presentation screen.\n\n"
+                "A white disc will appear on the left screen.\n\n"
                 "Press SPACE to remove the disc.\n\n"
-                "Then adjust the probe disc on the other screen.\n\n"
-                "During adjustment, the presentation screen will remain black.\n\n"
-                "First adjustment:\n"
-                "UP = brighter\n"
-                "DOWN = darker\n"
-                "SPACE = confirm luminance\n\n"
-                "Second adjustment:\n"
-                "UP = more blur\n"
-                "DOWN = less blur\n"
-                "SPACE = confirm blur and go to the next trial\n\n"
-                "The blur-adjustment disc uses the luminance you selected in the first adjustment.\n\n"
+                "After, a new disc will appear on the right screen. You will adjust it in two steps to match the appearance of your afterimage:\n\n"
+                "Step 1: Brightness\n"
+                "UP / DOWN = Change brightness\n"
+                "SPACE = Confirm\n\n"
+                "Step 2: Blur\n"
+                "UP / DOWN = Change blur\n"
+                "SPACE = Confirm and go to next trial\n\n"
                 "Press SPACE to begin."
             ),
             quit_windows=[stim_win, probe_win],
