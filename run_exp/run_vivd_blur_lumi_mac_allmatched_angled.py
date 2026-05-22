@@ -59,7 +59,6 @@ PROBE_WINDOW_SIZE = [1920, 1080]
 BACKGROUND_COLOR = [-1, -1, -1]
 
 # --- Global Physical Setup (137-degree inward wrap) ---
-VIEWING_DISTANCE_CM = 50.0
 
 # --- Monitor settings for the stimulus screen (LEFT) ---
 MONITOR_WIDTH_CM = 56.0
@@ -246,13 +245,10 @@ def make_probe_window():
 def get_disc_position(eccentricity_deg):
     """
     Calculates the correct position for the LEFT monitor (Stimulus).
-    Uses hardcoded physical targets based on 137° inward setup at 50 cm.
     """
     # 1. Hardcoded tape-measure targets from the central gap
     if eccentricity_deg == 8.0:
-        target_cm = 7.2
     else:
-        target_cm = 25.3
 
     # 2. Subtract the 2.5 cm left monitor bezel
     dist_from_glass_edge = target_cm - STIM_BEZEL_WIDTH_CM
@@ -270,13 +266,10 @@ def get_disc_position(eccentricity_deg):
 def get_probe_position_pix(eccentricity_deg):
     """
     Calculates the correct position for the RIGHT monitor (Probe).
-    Uses pure pixel math based on 137° inward setup at 50 cm.
     """
     # 1. Hardcoded tape-measure targets from the central gap
     if eccentricity_deg == 8.0:
-        target_cm = 7.2
     else:
-        target_cm = 25.3
 
     # 2. Subtract the 0.5 cm right monitor bezel
     dist_from_glass_edge = target_cm - PROBE_BEZEL_WIDTH_CM
